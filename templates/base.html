@@ -1,0 +1,118 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+        <!--General -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="author" content="Vinta Software"/>
+
+    <title> {% block title %} {% endblock %}-VIKKO.UZ</title>
+    <meta name="description" content="{% block description %} {% endblock %}">
+    <meta name="keywords" content="{% block keywords %} {% endblock %}">
+
+    <link rel="canonical" href="{% block canonical %}{{ request.get_host }}{% endblock %}"/>
+
+    <meta property="og:locale" content="uz_UZ"/>
+	<meta property="og:locale:alternate" content="ru_RU"/>
+	<meta property="og:type" content="article"/>
+
+	<meta property="og:title" content="{% block ogtitle %}{% endblock %}"/>
+	<meta property="og:description" content="{% block ogdescription %} {% endblock %}"/>
+	<meta property="og:url" content="{% block ogurl %}{% endblock %}"/>
+	<meta property="og:site_name" content="{{ request.get_host }}"/>
+	<meta property="article:publisher" content="{{ request.get_host }}"/>
+{#	<meta property="article:modified_time" content="2022-07-07T06:38:39+00:00" />#}
+	<meta property="og:image" content="{% block ogimage %}{{ request.get_host }}{% endblock %}"/>
+
+	<meta property="og:image:width" content="600"/>
+	<meta property="og:image:height" content="314"/>
+	<meta name="twitter:card" content="summary_large_image"/>
+
+    <!--===============================================================================================-->
+    <link rel="icon" type="image/png" href="{% static 'images/icons/favicon.png' %}"/>
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="{% static 'vendor/bootstrap/css/bootstrap.min.css' %}">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="{% static 'fonts/font-awesome-4.7.0/css/font-awesome.min.css' %}">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="{% static 'fonts/themify/themify-icons.css' %}">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="{% static 'fonts/Linearicons-Free-v1.0.0/icon-font.min.css' %}">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="{% static 'fonts/elegant-font/html-css/style.css' %}">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="{% static 'vendor/animate/animate.css' %}">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="{% static 'vendor/css-hamburgers/hamburgers.min.css' %}">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="{% static 'vendor/animsition/css/animsition.min.css' %}">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="{% static 'vendor/select2/select2.min.css' %}">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="{% static 'vendor/daterangepicker/daterangepicker.css' %}">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="{% static 'vendor/slick/slick.css' %}">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="{% static 'vendor/lightbox2/css/lightbox.min.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'vendor/noui/nouislider.min.css' %}">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="{% static 'css/util.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/main.css' %}">
+    <!--===============================================================================================-->
+    {#    <script>#}
+    {#        window.replainSettings = {id: '6b91add9-dbb4-43c9-bdb7-df98acecf073'};#}
+    {#        (function (u) {#}
+    {#            var s = document.createElement('script');#}
+    {#            s.async = true;#}
+    {#            s.src = u;#}
+    {#            var x = document.getElementsByTagName('script')[0];#}
+    {#            x.parentNode.insertBefore(s, x);#}
+    {#        })('https://widget.replain.cc/dist/client.js');#}
+    {#    </script>#}
+    <script>
+        window.replainSettings = {id: '0c00eb0f-77a2-45ab-a2a0-b020b0d6976f'};
+        (function (u) {
+            var s = document.createElement('script');
+            s.async = true;
+            s.src = u;
+            var x = document.getElementsByTagName('script')[0];
+            x.parentNode.insertBefore(s, x);
+        })('https://widget.replain.cc/dist/client.js');
+    </script>
+    {% block styles %}{% endblock %}
+</head>
+<body class="animsition">
+
+<!-- Header -->
+{% include 'home/parts/headers.html' %}
+
+{% block content %}
+{% endblock %}
+
+
+<!-- Footer -->
+{% include 'parts/footer.html' %}
+
+
+<!-- Back to top -->
+<div class="btn-back-to-top bg0-hov" id="myBtn">
+		<span class="symbol-btn-back-to-top">
+			<i class="fa fa-angle-double-up" aria-hidden="true"></i>
+		</span>
+</div>
+
+<!-- Container Selection1 -->
+<div id="dropDownSelect1"></div>
+<div id="dropDownSelect2"></div>
+
+{% include 'parts/scripts.html' %}
+
+{% block scripts %}
+
+{% endblock %}
+
+</body>
+</html>

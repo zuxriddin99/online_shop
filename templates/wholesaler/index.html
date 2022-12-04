@@ -1,0 +1,119 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block styles %}
+    <style>
+        span.upload {
+            padding: 0 0 0 15px;
+        }
+
+        .fa-upload {
+            font-size: 14px;
+            color: #b3b3b3;
+        }
+
+        .fa-upload::before {
+            padding-right: 10px;
+        }
+
+        label.file {
+            vertical-align: middle;
+            padding: 10px;
+            display: inline-block;
+            color: #b3b3b3;
+        }
+    </style>
+{% endblock %}
+
+{% block content %}
+    <!-- Title Page -->
+    <section class="bg-title-page p-t-40 p-b-50 flex-col-c-m"
+             style="background-image: url({% static 'images/banner-optovikam.jpg' %});">
+        <h2 class="l-text2 t-center">
+            Оптовикам
+        </h2>
+    </section>
+
+    <!-- content page -->
+    <section class="bgwhite p-t-66 p-b-60">
+        <div class="container">
+            {% if messages %}
+                {% for message in messages %}
+                    {#                    <h1>{{ message.tags = 'error' }}</h1>#}
+                    <div class="alert alert-{{ message.tags }} alert-dismissible fade show {% if message.tags %} alert-{{ message.tags }}{% endif %}">
+                        <strong>{{ message|safe }}</strong>
+                        <button class="close" type="button" data-dismiss="alert" aria-label="Close"><span
+                                class="font-weight-light" aria-hidden="true">×</span></button>
+                    </div>
+                {% endfor %}
+            {% endif %}
+            <div class="row">
+
+                <div class="col-md-12 p-b-30">
+                    <form class="leave-comment" action="{% url 'wholesaler-form' %}" method="post"
+                          enctype="multipart/form-data">
+                        {% csrf_token %}
+                        <h4 class="m-text26 p-b-36 p-t-15">
+                            Подайте заявку на Оптовый аккаунт
+                        </h4>
+                        <div class="bo4 of-hidden size15 m-b-20">
+                            <input type="text" name="name" maxlength="30" required=""
+                                   class="sizefull s-text7 p-l-22 p-r-22" placeholder="Ваше имя">
+                        </div>
+                        <div class="bo4 of-hidden size15 m-b-20">
+                            <input type="number" name="phone" maxlength="15" required=""
+                                   class="sizefull s-text7 p-l-22 p-r-22" placeholder="Номер телефона">
+                        </div>
+                        <div class="bo4 of-hidden size15 m-b-20">
+                            <input type="email" name="email" maxlength="30"
+                                   class="sizefull s-text7 p-l-22 p-r-22" placeholder="Email адрес">
+                        </div>
+                        <div class="bo4 of-hidden size15 m-b-20">
+                            <input type="text" name="company_name" maxlength="30"
+                                   class="sizefull s-text7 p-l-22 p-r-22" placeholder="Название компании">
+                        </div>
+                        <div class="bo4 of-hidden size15 m-b-20">
+                            <input type="text" name="social_network" maxlength="50"
+                                   class="sizefull s-text7 p-l-22 p-r-22" placeholder="Вебсайт/Instagram">
+                        </div>
+                        <div class="bo4 of-hidden size15 m-b-20">
+                            <input type="text" name="city" maxlength="30"
+                                   class="sizefull s-text7 p-l-22 p-r-22" placeholder="Город">
+                        </div>
+                        <div class="bo4 of-hidden size15 m-b-20">
+                            <label for="id_file" class="file">
+                                <span class="upload fa fa-upload">Загрузить Сертификат/Диплом для ускорения модерации</span>
+                            </label>
+                            <input type="file" name="document" title="Choose a video please" id="id_file"
+                                   style="display: none">
+                        </div>
+
+                        <div class="rs2-select2 bo4 of-hidden m-t-5 m-b-5 m-r-10 m-b-20">
+                            <select name="business_type" id="id_business_type" class="selection-2">
+                                <option selected="">Выберите тип бизнеса</option>
+                                <option value="Для себя">Для себя</option>
+                                <option value="Продажа">Продажа</option>
+                                <option value="Другое">Другое</option>
+                            </select>
+                        </div>
+
+                        <textarea class="dis-block s-text7 size20 bo4 p-l-22 p-r-22 p-t-13 m-b-20" name="comment"
+                                  placeholder="Ваши вопросы, комментарий"></textarea>
+
+                        <div class="w-size25">
+                            <!-- Button -->
+                            <button class="flex-c-m size2 bg1 bo-rad-23 hov1 m-text3 trans-0-4">
+                                Отправить
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+{% endblock %}
+
+{% block scripts %}
+
+{% endblock %}

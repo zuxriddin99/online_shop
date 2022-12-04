@@ -1,0 +1,56 @@
+{% load static %}
+
+<div class="header-cart header-dropdown">
+    <ul class="header-cart-wrapitem">
+        {% for item in cart %}
+            <li class="header-cart-item">
+                <form method="post" action="{% url 'remove-cart' %}">
+                    {% csrf_token %}
+                    <input type="hidden" name="product_id" value="{{ item.product.id }}">
+                    <input class="redirect_url_cl" type="hidden" name="redirect_url" value="{{ request.get_full_path }}">
+                    <button style="border: none">
+                        <div class="header-cart-item-img">
+                            <img src="{{ item.product.poster }}" alt="IMG">
+                        </div>
+                    </button>
+
+                </form>
+
+                <div class="header-cart-item-txt">
+
+                    <a href="{% url 'product-detail' item.product.slug %}" class="header-cart-item-name">
+                        {{ item.product.title }}
+                    </a>
+
+{#                    <span class="header-cart-item-info">#}
+{#                        {{ item.quantity }} x ${{ item.price }}#}
+{#                    </span>#}
+                </div>
+            </li>
+        {% endfor %}
+    </ul>
+
+    <div class="header-cart-total">
+{#        Итоговая сумма: ${{ cart.total_cost }}#}
+    </div>
+
+    <div class="header-cart-buttons">
+        <div class="header-cart-wrapbtn">
+            <!-- Button -->
+            <a href="{% url 'cart' %}" class="flex-c-m size1 bg1 bo-rad-20 hov1 s-text1 trans-0-4">
+                Открыть
+            </a>
+        </div>
+
+        <div class="header-cart-wrapbtn">
+            <!-- Button -->
+            <a href="{% url 'cart' %}#checkout" class="flex-c-m size1 bg1 bo-rad-20 hov1 s-text1 trans-0-4">
+                Оформить
+            </a>
+        </div>
+    </div>
+</div>
+<script>
+    document.getElementsByClassName("redirect_url_cl").value = window.location.href;
+
+</script>

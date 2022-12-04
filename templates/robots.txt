@@ -1,0 +1,6 @@
+User-Agent: *
+Disallow: /nogooglebot/
+Allow: /
+Host: https://vikko.uz/
+
+Sitemap: https://vikko.uz/sitemap.xml

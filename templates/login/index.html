@@ -1,0 +1,110 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block title %}
+    Авторизация
+{% endblock %}
+
+{% block content %}
+    <div class="container bgwhite p-t-35 p-b-80 mt-5">
+        <h2 class="l-text2 t-center" style="color: black;">Авторизация</h2>
+
+        <div class="flex-w flex-sb" style="justify-content: center;">
+            <form id="login_form" action="{% url 'login' %}" method="POST">
+                {% csrf_token %}
+                <div class="search-product pos-relative bo4 of-hidden mt-5">
+
+                    <input id="phone" class="s-text7 size4 p-l-23 p-r-50" style="height: 50px; width: 300px;"
+                           type="number" name="phone" placeholder="Введите номер телефона без +" required
+                           oninvalid="this.setCustomValidity('Вы должны ввести телефон')"
+                           oninput="this.setCustomValidity('')">
+                    <button id="subButPhone" type="submit" class="flex-c-m size5 ab-r-m color2 color0-hov trans-0-4">
+                        <i class="fs-12 fa fa-arrow-circle-right" aria-hidden="true"></i>
+                    </button>
+                </div>
+                <div id="div_sms_code" class="search-product pos-relative bo4 of-hidden mt-1" type="hidden">
+
+                    <input id="sms_code" class="s-text7 size4 p-l-23 p-r-50" style="height: 50px; width: 300px;"
+                           type="text" name="sms_code" placeholder="Введите код из смс"
+                           oninvalid="this.setCustomValidity('Вы должны ввести код')"
+                           oninput="this.setCustomValidity('')">
+                    <button type="submit" class="flex-c-m size5 ab-r-m color2 color0-hov trans-0-4">
+                        <i class="fs-12 fa fa-arrow-circle-right" aria-hidden="true"></i>
+                    </button>
+                </div>
+
+            </form>
+        </div>
+    </div>
+{% endblock %}
+
+{% block scripts %}
+    <script>
+        (function ($) {
+            let phone = $('#phone');
+            let subButPhone = $('#subButPhone');
+            let smsCode = $('#sms_code');
+            let divSmsCode = $('#div_sms_code');
+            let signUpForm = $('#login_form');
+            divSmsCode.hide();
+            signUpForm.on('submit', function (e) {
+                e.preventDefault();
+                let $this = $(this);
+                let method = $this.attr('method');
+                let endpoint = $(this).attr('action');
+                let data = $this.serialize();
+                if (!smsCode.val()) {
+                    smsCode.prop("required", true);
+                }
+                $.ajax({
+                    method: method,
+                    url: endpoint,
+                    data: data,
+                    success: function (response) {
+                        if (response.success) {
+                            if (response.redirect) {
+                                location.reload();
+                            }
+                            divSmsCode.show();
+                            phone.prop("readonly", true);
+                            subButPhone.prop("disabled", true);
+                            subButPhone.hide()
+                            alert(response.message);
+                        } else {
+                            alert(response.message);
+                        }
+                    },
+                    error: function ({responseText}) {
+                        console.log(responseText)
+                        alert("Неверный код")
+                    }
+                })
+            })
+
+
+            $.ajax({
+                method: 'post',
+                url: "{% url 'login' %}",
+                success: function ({response}) {
+                },
+                error: function (err) {
+                    {#console.log(err)#}
+                }
+            })
+        }(jQuery));
+    </script>
+    <style>
+        /* Chrome, Safari, Edge, Opera */
+        input::-webkit-outer-spin-button,
+        input::-webkit-inner-spin-button {
+            -webkit-appearance: none;
+            margin: 0;
+        }
+
+        /* Firefox */
+        input[type=number] {
+            -moz-appearance: textfield;
+        }
+    </style>
+{% endblock %}

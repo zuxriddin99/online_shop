@@ -1,0 +1,51 @@
+{% extends 'base.html' %}
+{% load static %}
+
+
+{% block title %}{{ config.SEO_HOME_TITLE }}{% endblock %}
+{% block description %}{{ config.SEO_HOME_DESC }}{% endblock %}
+{% block keywords %}{{ config.SEO_HOME_KEYWORDS }}{% endblock %}
+
+{% block canonical %}{{ request.get_host }}{% url 'home-page' %}{% endblock %}
+
+{% block ogtitle %}{{ config.SEO_HOME_TITLE }} - VIKKO.UZ{% endblock %}
+{% block ogdescription %}{{ config.SEO_HOME_DESC }}{% endblock %}
+{% block ogurl %}https://{{ request.get_host }}{% url 'home-page' %}{% endblock %}
+{% block ogimage %}https://{{ request.get_host }}/media/{{ config.SEO_HOME_IMAGE }}{% endblock %}
+
+
+{% block styles %}
+
+{% endblock %}
+
+{% block content %}
+
+
+    <!-- Slide1 -->
+    {% include 'home/parts/slide.html' %}
+
+    <!-- Banner -->
+    {% include 'home/parts/banner.html' %}
+
+    <!-- New Product -->
+    {% include 'home/parts/new_product.html' %}
+
+    <!-- Banner2 -->
+{#    {% include 'home/parts/banner2.html' %}#}
+
+
+    <!-- Blog -->
+    {% include 'home/parts/blog.html' %}
+ <!-- Blog -->
+    {% include 'home/parts/order_ins.html' %}
+
+    <!-- Instagram -->
+{#    {% include 'home/parts/instagrem.html' %}#}
+
+    <!-- Shipping -->
+    {% include 'home/parts/shipping.html' %}
+{% endblock %}
+
+{% block scripts %}
+
+{% endblock %}

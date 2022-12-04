@@ -1,0 +1,68 @@
+{% load static %}
+
+<section class="newproduct bgwhite p-t-45 p-b-105">
+    <div class="container">
+        <div class="sec-title p-b-60">
+            <h3 class="m-text5 t-center">
+                ПОПУЛЯРНЫЕ ПРОДУКТЫ
+            </h3>
+        </div>
+
+        <!-- Slide2 -->
+        <div class="wrap-slick2">
+            <div class="slick2">
+                {% for popular_product in popular_products %}
+                    <div class="item-slick2 p-l-15 p-r-15">
+                        <!-- Block2 -->
+                        <div class="block2">
+                            <a href="{% url 'product-detail' popular_product.slug %}"
+                               class="block2-name dis-block s-text3 p-b-5">
+                                <div class="block2-img wrap-pic-w of-hidden pos-relative {% if popular_product.new %} block2-labelnew {% endif %}">
+                                    <img src="{{ popular_product.poster }}" alt="IMG-PRODUCT">
+
+                                    <div class="block2-overlay trans-0-4">
+                                        {#                                    <a href="#" class="block2-btn-towishlist hov-pointer trans-0-4">#}
+                                        {#                                        <i class="icon-wishlist icon_heart_alt" aria-hidden="true"></i>#}
+                                        {#                                        <i class="icon-wishlist icon_heart dis-none" aria-hidden="true"></i>#}
+                                        {#                                    </a>#}
+                                        <form action="{% url 'add-cart' %}" method="post">
+                                            {% csrf_token %}
+                                            <div class="block2-btn-addcart w-size1 trans-0-4">
+                                                <!-- Button -->
+                                                <input type="hidden" name="product_id" value="{{ popular_product.id }}">
+                                                <input type="hidden" name="quantity" value="1">
+                                                <input id="redirect_url_id" type="hidden" name="redirect_url"
+                                                       value="{{ request.get_full_path }}">
+                                                <button class="flex-c-m size1 bg4 bo-rad-23 hov1 s-text1 trans-0-4">
+                                                    Добавить в корзину
+                                                </button>
+                                            </div>
+                                        </form>
+
+                                    </div>
+                                </div>
+
+                                <div class="block2-txt p-t-20">
+
+                                    {{ popular_product.title }}
+
+
+                                    <span class="block2-price m-text6 p-r-5">
+{#									{{ popular_product.price }}$#}
+								</span>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                {% endfor %}
+
+
+            </div>
+        </div>
+
+    </div>
+</section>
+<script>
+    document.getElementById("redirect_url_id").value = window.location.href;
+
+</script>

@@ -1,0 +1,166 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}
+    Страница профиля
+{% endblock %}
+
+
+
+{% block styles %}
+{% endblock %}
+
+
+<body class="animsition">
+
+
+{% block content %}
+    <!-- Title Page -->
+    {#    {% include 'shop/parts/title_page.html' %}#}
+
+
+    <!-- Content page -->
+    <section class="bgwhite p-t-20 p-b-65">
+        <div class="container">
+            <div class="row">
+                <div class="bo9 w-full p-l-40 p-r-40 p-t-30 p-b-38 m-t-30 m-r-0 m-r-auto p-lr-15-sm">
+                    <div class="flex-w flex-sb-m p-b-12">
+                        <span class="s-text18 w-size19 w-full-sm">
+                            Пользователь телефона:
+                        </span>
+
+                        <span class="m-text21 w-size10  ">
+						    {{ user_data.phone }}
+					    </span>
+
+                        <form action="{% url 'logout' %}">
+                            <button style="width: 120px;margin-left: 10px;"
+                                    class="flex-c-m  size13 bg1 bo-rad-23 hov1 s-text1 trans-0-4 w-size10">
+                                Выйти
+                            </button>
+                        </form>
+                    </div>
+                    {% for address in addresses %}
+                        <div class="flex-w flex-sb-m p-b-12 bo10 p-t-8">
+                            {% if address.default %}
+                                <span class="s-text18 w-size19 w-full-sm">
+                            Основной адрес:
+                        </span>
+                            {% else %}
+                                <span class="s-text18 w-size19 w-full-sm">
+                            Адрес:
+                        </span>
+                            {% endif %}
+
+                            <span class="m-text18 w-size20  " style="display: block">
+						   {{ address.country }}, {{ address.city }}, {{ address.address }}
+					    </span>
+                        </div>
+                    {% endfor %}
+                    <form action="{% url 'add-address' %}" method="post">
+                        {% csrf_token %}
+                        <div class="flex-w flex-sb bo10 p-t-15 p-b-20">
+					<span class="s-text18 w-size19 w-full-sm">
+						Добавить адрес:
+					</span>
+
+                            <div class="w-size20 w-full-sm">
+                                {#                            <p class="s-text8 p-b-23">#}
+                                {#                                There are no shipping methods available. Please double check your address, or contact us#}
+                                {#                                if#}
+                                {#                                you need any help.#}
+                                {#                            </p>#}
+                                {##}
+                                {#                            <span class="s-text19">#}
+                                {#							Calculate Shipping#}
+                                {#						</span>#}
+                                <div style="display: inline-flex; ">
+                                    <div class="rs2-select2 rs3-select2 rs4-select2 bo4 of-hidden w-size21 m-t-8 m-b-12 m-r-20"
+                                         style=" max-width: none;  width: 300px;">
+                                        <select class="selection-2" name="country" required>
+                                            <option value="">Выберите страну...</option>
+                                            {% for country in countries %}
+                                                <option value="{{ country.id }}">{{ country.name }}</option>
+                                            {% endfor %}
+                                        </select>
+                                    </div>
+
+                                    <div class="size13 bo4 m-b-12 m-t-8 m-r-30"
+                                         style=" max-width: none;  width: 300px;">
+                                        <input class="sizefull s-text7 p-l-15 p-r-15" type="text" name="city"
+                                               placeholder="Город" required>
+                                    </div>
+
+                                    <div class="size13   m-b-12 m-t-8">
+                                        <label class="m-text18 w-size20 m-r-15" for="default">Основной: </label>
+                                        <input id="default" class=" s-text7 p-l-35 p-r-15 m-t-5" type="checkbox"
+                                               style="margin-top: 13px" name="default">
+
+                                    </div>
+                                </div>
+                                <div style="display: inline-flex">
+                                    <div style="max-width: 607px!important" class="size13 bo4 m-b-22 m-r-20">
+                                        <input style="width: 604px!important" class=" s-text7 p-l-15 p-r-15" type="text"
+                                               name="address"
+                                               placeholder="Адрес . . ." required>
+                                        <input type="hidden" name="user" value="{{ user.id }}">
+                                    </div>
+
+                                    <div class="size14 trans-0-4 m-b-10">
+                                        <!-- Button -->
+                                        <button style="width: 120px;margin-left: 10px;"
+                                                class="flex-c-m  size13 bg1 bo-rad-23 hov1 s-text1 trans-0-4">
+                                            Сохранить
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <div id="orders_list" class="row">
+                <div class="col-sm-6 col-md-4 col-lg-2 p-b-50 m-t-20">
+                    {% include 'profile/parts/leftbar.html' %}
+                </div>
+
+                <div class="col-sm-6 col-md-8 col-lg-10 p-b-50">
+                    <div class="bo9 w-full p-l-40 p-r-40 p-t-30 p-b-38 m-t-30 m-r-0 m-r-auto p-lr-15-sm"
+                         style="width: 101.5%">
+                        <table class="table">
+                            <thead>
+                            <tr>
+                                <th class="s-text18  w-full-sm" scope="col">#</th>
+                                <th class="s-text18  w-full-sm" scope="col">Статус</th>
+                                <th class="s-text18  w-full-sm" scope="col">Создано на</th>
+                                <th class="s-text18  w-full-sm" scope="col">Оплачено</th>
+                                <th class="s-text18  w-full-sm" scope="col">Общая стоимость</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            {% for order in orders %}
+                                <tr>
+                                    <th class="s-text19  w-full-sm" scope="row">{{ order.id }}</th>
+                                    <td class="s-text19  w-full-sm"><a
+                                            href="{% url 'order-detail' order.id %}">{{ order.status }}</a></td>
+                                    <td class="s-text19  w-full-sm"> {{ order.created_at|date:'Y/m/d H:i' }}</td>
+                                    <td class="s-text19  w-full-sm">{{ order.paid }}</td>
+                                    <td class="s-text19  w-full-sm">{{ order.total_cost }}</td>
+                                </tr>
+                            {% endfor %}
+
+                            </tbody>
+                        </table>
+
+                    </div>
+                </div>
+            </div>
+
+
+        </div>
+    </section>
+{% endblock %}
+
+{% block scripts %}
+
+{% endblock %}

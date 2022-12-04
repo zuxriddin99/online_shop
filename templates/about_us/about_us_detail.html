@@ -1,0 +1,44 @@
+{% extends 'base.html' %}
+{% load static %}
+
+
+{% block title %}{{ about_us.title }}{% endblock %}
+
+{% block description %} {{ about_us.description }} {% endblock %}
+{% block keywords %}{{ about_us.seo_keyword }}{% endblock %}
+
+{% block canonical %}{{ request.get_host }}{% url 'about-us' %}{% endblock %}
+
+{% block ogtitle %} {{ about_us.title }} - VIKKO.UZ{% endblock %}
+{% block ogdescription %} {{ about_us.description }}{% endblock %}
+{% block ogurl %}{{ request.get_host }}{% url 'about-us' %}{% endblock %}
+{% block ogimage %}{{ request.get_host }}{{ about_us.image.url }}{% endblock %}
+
+{% block styles %}
+
+{% endblock %}
+
+{% block content %}
+
+    <!-- content page -->
+    <section class="bgwhite p-t-60 p-b-25">
+        <div class="container">
+            <div class="row">
+                <h1>{{ about_us.title }}</h1>
+                <div class="col-md-8 col-lg-12 p-b-80">
+                    <div class="p-r-50 p-r-0-lg">
+                        <div class="p-b-40">
+                            <span>{{ about_us.description|safe }}</span>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+{% endblock %}
+
+{% block scripts %}
+
+{% endblock %}

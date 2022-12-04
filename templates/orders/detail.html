@@ -1,0 +1,126 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block styles %}
+
+{% endblock %}
+
+{% block title %}
+
+{% endblock %}
+
+{% block content %}
+    <!-- Title Page -->
+    {#    <section class="bg-title-page p-t-40 p-b-50 flex-col-c-m"#}
+    {#             style="background-image: url({% static 'images/heading-pages-01.jpg' %});">#}
+    {#        <h2 class="l-text2 t-center">#}
+    {#            КОРЗИНА#}
+    {#        </h2>#}
+    {#    </section>#}
+    <section class="bgwhite p-t-20 p-b-65">
+        <div class="container">
+            <div class="row">
+                <div class="bo9 w-full p-l-40 p-r-40 p-t-30 p-b-38 m-t-30 m-r-0 m-r-auto p-lr-15-sm">
+                    <div class="flex-w flex-sb-m p-b-12">
+                        <span class="s-text18 w-size19 w-full-sm">
+                            Номер заказа
+                        </span>
+
+                        <span class="m-text21 w-size20  ">
+						    {{ order.id }}
+					    </span>
+                    </div>
+                    <div class="flex-w flex-sb-m p-b-12 bo10 p-t-8">
+
+                <span class="s-text18 w-size19 w-full-sm">
+                    Статус заказа:
+                </span>
+                        <span class="m-text18 w-size20  " style="display: block">
+                    {{ order.status }}
+                </span>
+                    </div>
+                    <div class="flex-w flex-sb-m p-b-12 bo10 p-t-8">
+
+                <span class="s-text18 w-size19 w-full-sm">
+                    Оплачено:
+                </span>
+                        <span class="m-text18 w-size20  " style="display: block">
+{#                    {{ order.paid }}#}
+                </span>
+                    </div>
+                    <div class="flex-w flex-sb-m p-b-12 bo10 p-t-8">
+
+                <span class="s-text18 w-size19 w-full-sm">
+                    Сумма заказа:
+                </span>
+                        <span class="m-text18 w-size20  " style="display: block">
+{#                    {{ order.total_cost }}#}
+                </span>
+                    </div>
+                    <div class="flex-w flex-sb-m p-b-12 bo10 p-t-8">
+
+                <span class="s-text18 w-size19 w-full-sm">
+                    Дата и время заказа:
+                </span>
+                        <span class="m-text18 w-size20  " style="display: block">
+                    {{ order.created_at }}
+                </span>
+                    </div>
+                    <div class="flex-w flex-sb-m p-b-12 bo10 p-t-8">
+
+                <span class="s-text18 w-size19 w-full-sm">
+                    Адрес:
+                </span>
+                        <span class="m-text18 w-size20  " style="display: block">
+                    {{ order.address }}
+                </span>
+                    </div>
+                </div>
+                <h2 style="margin-left: 45%; margin-top: 50px; margin-bottom: 30px">Товары</h2>
+                <div class="container-table-cart pos-relative">
+                    <div class="wrap-table-shopping-cart bgwhite" style="border: 1px solid #e6e6e6;">
+                        <table class="table-shopping-cart">
+                            <tr class="table-head">
+                                <th class="column-1"></th>
+                                <th class="column-2">Название продукта</th>
+                                <th class="column-3">Цена за единицу</th>
+                                <th class="column-4">Количество</th>
+                                <th class="column-5">Общая цена</th>
+                            </tr>
+                            {% for item in items %}
+                                {% with product=item.product %}
+                                    <tr class="table-row">
+                                        <td class="column-1">
+                                            {% csrf_token %}
+                                            <div class="cart-img-product b-rad-4 o-f-hidden">
+                                                <img src="{{ product.poster }}" alt="IMG-PRODUCT">
+                                            </div>
+                                        </td>
+                                        <td class="column-2">{{ product.title }}</td>
+                                        <td class="column-3">{{ item.product_price }}</td>
+                                        <td class="column-4">
+                                            {{ item.product_quantity }}
+                                        </td>
+                                        <td class="column-5">{{ item.product_total_amount }}</td>
+                                    </tr>
+                                {% endwith %}
+                            {% endfor %}
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+    <script>
+        var els = document.getElementsByClassName("redirect_url_class");
+        for (var i = 0; i < els.length; i++) {
+            els[i].value = window.location.href;
+        }
+    </script>
+{% endblock %}
+
+{% block scripts %}
+
+{% endblock %}

@@ -1,0 +1,176 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %} {{ brand.name }}{% endblock %}
+
+{% block description %}{{ brand.description }}{% endblock %}
+{% block keywords %}{{ brand.seo_keyword }}{% endblock %}
+
+{% block canonical %}{{ request.get_host }}{% url 'brand' brand.slug %}{% endblock %}
+
+{% block ogtitle %}{{ brand.name }}-VIKKO.UZ{% endblock %}
+{% block ogdescription %}{{ brand.description }}{% endblock %}
+{% block ogurl %}{{ request.get_host }}{% url 'brand' %}{% endblock %}
+{% block ogimage %}{{ request.get_host }}{{ brand.logo.url }}{% endblock %}
+
+{% block styles %}
+
+{% endblock %}
+
+{% block content %}
+
+    <!-- content page -->
+    <section class="bgwhite p-t-60 p-b-25">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-8 col-lg-12 p-b-80">
+                    <div class="p-r-50 p-r-0-lg">
+                        <div class="p-b-40">
+
+                            <div class="blog-detail-txt p-t-33">
+                                <h1 class="m-text5 t-center">
+                                    {{ brand.name }}
+                                </h1>
+                                <br>
+                                <br>
+                                <a href="#">
+                                    <img src="{{ brand.logo.url }}" alt="" width="150"
+                                         style="float: left; border: 1px solid #e0e0e0; margin-right: 10px;">
+                                </a>
+                                {{ brand.description|safe }}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="sec-title p-b-52 m-t-80">
+                <h3 class="m-text5 t-center">
+                    Продукция этого бренда
+                </h3>
+            </div>
+            <div class="col-sm-6 col-md-8 col-lg-9 p-b-50">
+
+                <!-- Product -->
+                <div class="row">
+                    {% for product in products %}
+                        <div class="col-sm-12 col-md-6 col-lg-4 p-b-50">
+                            <!-- Block2 -->
+                            <a href="{% url 'product-detail' product.slug %}"
+                               class="block2-name dis-block s-text3 p-b-5">
+                                <div class="block2">
+                                    <div class="block2-img wrap-pic-w of-hidden pos-relative {% if product.new %} block2-labelnew {% endif %}">
+                                        <img style="height: 240px" src="{{ product.poster }}" alt="IMG-PRODUCT">
+                                        <div class="block2-overlay trans-0-4">
+                                            {% if user.is_authenticated %}
+                                                {% if product.is_favourite %}
+                                                    <form method="post" action="{% url 'remove-favourite' %}">
+                                                        {% csrf_token %}
+                                                        <input type="hidden" name="product_id" value="{{ product.id }}">
+                                                        <input id="redirect_url_id" type="hidden" name="redirect_url"
+                                                               value="{{ request.get_full_path }}">
+                                                        <button class="block2-btn-towishlist hov-pointer">
+                                                            <i class="icon-wishlist icon_heart_alt"
+                                                               aria-hidden="true"></i>
+                                                            <i class="icon-wishlist icon_heart dis-none"
+                                                               aria-hidden="true"></i>
+                                                        </button>
+                                                    </form>
+                                                {% else %}
+                                                    <form method="post" action="{% url 'add-favourite' %}">
+                                                        {% csrf_token %}
+                                                        <input type="hidden" name="product_id" value="{{ product.id }}">
+                                                        <input id="redirect_url_id" type="hidden" name="redirect_url"
+                                                               value="{{ request.get_full_path }}">
+                                                        <button class="block2-btn-addwishlist hov-pointer">
+                                                            <i class="icon-wishlist icon_heart_alt"
+                                                               aria-hidden="true"></i>
+                                                            <i class="icon-wishlist icon_heart dis-none"
+                                                               aria-hidden="true"></i>
+                                                        </button>
+                                                    </form>
+                                                {% endif %}
+
+                                            {% endif %}
+
+
+                                            <div class="block2-btn-addcart w-size1 trans-0-4">
+                                                <!-- Button -->
+                                                <form action="{% url 'add-cart' %}" method="post">
+                                                    {% csrf_token %}
+                                                    <input type="hidden" name="product_id" value="{{ product.id }}">
+                                                    <input type="hidden" name="quantity" value="1">
+                                                    <input id="redirect_url_id" type="hidden" name="redirect_url"
+                                                           value="{{ request.get_full_path }}">
+                                                    <button class="flex-c-m size1 bg4 bo-rad-23 hov1 s-text1 trans-0-4">
+                                                        Добавить в корзину
+                                                    </button>
+                                                </form>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="block2-txt p-t-20">
+                                        {{ product.title }}
+                                        <span class="block2-price p-r-5"
+                                              style="font-size: 12px; color: gray;">{{ product.dosage }} mg</span>
+                                        <br>
+                                        <span class="block2-price m-text6 p-r-5"><b>
+                            {% if product.price_discount %}
+                                <span style="text-decoration: line-through;">{{ product.price }}$</span>
+                                - <span style="color: #dc2323;">{{ product.price_discount }}$</span>
+                            {% else %}
+                                {{ product.price }}$
+                            {% endif %}
+                        </b></span>
+                                        {% if product.telegram_link %}
+                                            <a href="{{ product.telegram_link }}"
+                                               class="topbar-social-item fa fa-telegram"
+                                               title="Ссылка на товар в телеграме"></a>
+                                        {% endif %}
+
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+                    {% endfor %}
+
+                </div>
+                <ul class="pagination justify-content-center flex-wrap mt-2 mb-4">
+                    {% if page_obj.has_previous %}
+                        <li class="page-item"><a class="page-link"
+                                                 href="?page={{ page_obj.previous_page_number }}">&laquo;</a></li>
+                    {% else %}
+                        <li class="disabled page-item"><span class="page-link">&laquo;</span></li>
+                    {% endif %}
+                    {% for i in page_range|default_if_none:page_obj.paginator.get_elided_page_range %}
+                        {% if page_obj.number == i %}
+                            <li class="active page-item"><span class="page-link">{{ i }} <span
+                                    class="sr-only">(current)</span></span>
+                            </li>
+                        {% else %}
+                            {% if i == page_obj.paginator.ELLIPSIS %}
+                                <li class="page-item"><span class="page-link">{{ i }}</span></li>
+                            {% else %}
+                                <li class="page-item"><a class="page-link" href="?page={{ i }}">{{ i }}</a></li>
+                            {% endif %}
+                        {% endif %}
+                    {% endfor %}
+                    {% if page_obj.has_next %}
+                        <li class="page-item"><a class="page-link"
+                                                 href="?page={{ page_obj.next_page_number }}">&raquo;</a>
+                        </li>
+                    {% else %}
+                        <li class="disabled page-item"><span class="page-link">&raquo;</span></li>
+                    {% endif %}
+                </ul>
+            </div>
+        </div>
+    </section>
+{% endblock %}
+
+{% block scripts %}
+    <script>
+        document.getElementById("redirect_url_id").value = window.location.href;
+
+    </script>
+{% endblock %}

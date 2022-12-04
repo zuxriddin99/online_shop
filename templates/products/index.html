@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+
+{% block title %}{{ config.SEO_PRODUCTS_TITLE }}{% endblock %}
+{% block description %}{ config.SEO_PRODUCTS_DESC }}{% endblock %}
+{% block keywords %}{ config.SEO_PRODUCTS_KEYWORDS }}{% endblock %}
+
+{% block canonical %}{{ request.get_host }}{% url 'shop' %}{% endblock %}
+
+{% block ogtitle %}{{ config.SEO_PRODUCTS_TITLE }} - VIKKO.UZ{% endblock %}
+{% block ogdescription %}{{ config.SEO_PRODUCTS_DESC }}{% endblock %}
+{% block ogurl %}https://{{ request.get_host }}{% url 'shop' %}{% endblock %}
+{% block ogimage %}https://{{ request.get_host }}/media/{{ config.SEO_PRODUCTS_IMAGE }}{% endblock %}
+
+{% block styles %}
+
+{% endblock %}
+
+{% block content %}
+    <!-- breadcrumb -->
+    {% include 'products/parts/breadcrumb.html' %}
+
+    <!-- Product Detail -->
+    {% include 'products/parts/product.html' %}
+
+
+    <!-- Relate Product -->
+    {% include 'products/parts/relate_product.html' %}
+
+{% endblock %}
+
+
+{% block scripts %}
+
+{% endblock %}

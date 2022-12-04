@@ -1,0 +1,38 @@
+{% load static %}
+<section class="blog bgwhite p-t-94 p-b-65">
+    <div class="container">
+        <div class="sec-title p-b-52">
+            <h1 class="m-text5 t-center">
+                Наш блог
+            </h1>
+        </div>
+
+        <div class="row">
+            {% for blog in blogs %}
+                <div class="col-sm-10 col-md-4 p-b-30 m-l-r-auto">
+                    <!-- Block3 -->
+                    <div class="block3">
+                        <a href="{{ blog.get_absolute_url }}" class="block3-img dis-block hov-img-zoom">
+                            <img src="{{ blog.img.url }}" alt="IMG-BLOG">
+                        </a>
+
+                        <div class="block3-txt p-t-14">
+                            <h4 class="p-b-7">
+                                <a href="{{ blog.get_absolute_url }}" class="m-text11">
+                                    {{ blog.title }}
+                                </a>
+                            </h4>
+
+                            <span class="s-text6">Был создан:</span> <span class="s-text7">{{ blog.created_at }}</span>
+
+                            <p class="s-text8 p-t-16">
+                                {{ blog.short_description | slice:"150" }}
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+
+        </div>
+    </div>
+</section>

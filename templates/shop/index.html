@@ -1,0 +1,49 @@
+{% extends 'base.html' %}
+{% load static %}
+
+
+{% block title %}{{ config.SEO_SHOP_TITLE }}{% endblock %}
+{% block description %}{ config.SEO_SHOP_DESC }}{% endblock %}
+{% block keywords %}{ config.SEO_SHOP_KEYWORDS }}{% endblock %}
+
+{% block canonical %}{{ request.get_host }}{% url 'shop' %}{% endblock %}
+
+{% block ogtitle %}{{ config.SEO_SHOP_TITLE }} - VIKKO.UZ{% endblock %}
+{% block ogdescription %}{{ config.SEO_SHOP_DESC }}{% endblock %}
+{% block ogurl %}https://{{ request.get_host }}{% url 'shop' %}{% endblock %}
+{% block ogimage %}https://{{ request.get_host }}/media/{{ config.SEO_SHOP_IMAGE }}{% endblock %}
+
+
+{% block styles %}
+{% endblock %}
+
+
+<body class="animsition">
+
+{% block content %}
+    <!-- Title Page -->
+    {% include 'shop/parts/title_page.html' %}
+
+
+    <!-- Content page -->
+    <section id="products_list" class="bgwhite p-t-55 p-b-65">
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-6 col-md-4 col-lg-3 p-b-50">
+                    {% include 'shop/parts/leftbar.html' %}
+                </div>
+
+                <div class="col-sm-6 col-md-8 col-lg-9 p-b-50">
+                    <!--  -->
+                    {% include 'shop/parts/sorted.html' %}
+
+                    {% include 'shop/parts/product.html' %}
+                </div>
+            </div>
+        </div>
+    </section>
+{% endblock %}
+
+{% block scripts %}
+
+{% endblock %}

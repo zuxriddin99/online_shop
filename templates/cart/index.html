@@ -1,0 +1,257 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block styles %}
+
+{% endblock %}
+
+{% block title %}
+
+{% endblock %}
+
+
+{% block content %}
+    <!-- Title Page -->
+    <section class="bg-title-page p-t-40 p-b-50 flex-col-c-m"
+             style="background-image: url({% static 'images/cart.jpg' %});background-position: center;">
+        {#        <h2 class="l-text2 t-center">#}
+        {#            КОРЗИНА#}
+        {#        </h2>#}
+    </section>
+
+    <!-- Cart -->
+
+    <section class="cart bgwhite p-t-70 p-b-100">
+        <div class="container">
+            {% if messages %}
+                {% for message in messages %}
+                    {#                    <h1>{{ message.tags = 'error' }}</h1>#}
+                    <div class="alert alert-{{ message.tags }} alert-dismissible fade show {% if message.tags %} alert-{{ message.tags }}{% endif %}">
+                        <strong>{{ message|safe }}</strong>
+                        <button class="close" type="button" data-dismiss="alert" aria-label="Close"><span
+                                class="font-weight-light" aria-hidden="true">×</span></button>
+                    </div>
+                {% endfor %}
+            {% endif %}
+            {% if not cart_empty %}
+
+                <div class="container-table-cart pos-relative">
+                    <div class="wrap-table-shopping-cart bgwhite">
+                        <table class="table-shopping-cart">
+                            <tr class="table-head">
+                                <th class="column-1"></th>
+                                <th class="column-2">Товар</th>
+                                <th class="column-3">Цена за единицу</th>
+                                <th class="column-4 p-l-70">Количество</th>
+                                <th class="column-5">Общая цена</th>
+                            </tr>
+                            {% for item in cart %}
+                                {% with product=item.product %}
+                                    <tr class="table-row">
+                                        <td class="column-1">
+                                            <form method="post" action="{% url 'remove-cart' %}">
+                                                {% csrf_token %}
+                                                <input type="hidden" name="product_id" value="{{ item.product.id }}">
+                                                <input class="redirect_url_class" type="hidden" name="redirect_url"
+                                                       value="1">
+                                                <button style="border: none">
+                                                    <div class="cart-img-product b-rad-4 o-f-hidden">
+                                                        <img src="{{ product.poster }}" alt="IMG-PRODUCT">
+                                                    </div>
+                                                </button>
+                                            </form>
+                                        </td>
+                                        <td class="column-2">{{ product.title }}</td>
+                                        {#                                        <td class="column-3">${{ item.price }}</td>#}
+                                        <td class="column-4">
+                                            <div class="flex-w bo5 of-hidden w-size17">
+                                                {#                                            <button class="btn-num-product-down color1 flex-c-m size7 bg8 eff2">#}
+                                                {#                                            </button>#}
+                                                <form action="{% url 'decrement-item-cart' %}" method="post">
+                                                    {% csrf_token %}
+                                                    <input type="hidden" name="product_id" value="{{ product.id }}">
+                                                    <input class="redirect_url_class" type="hidden" name="redirect_url"
+                                                           value="">
+                                                    <button class="color1 flex-c-m size7 bg8 eff2">
+                                                        <i class="fs-12 fa fa-minus" aria-hidden="true"></i>
+
+                                                    </button>
+                                                </form>
+                                                <input class="size8 m-text18 t-center num-product" type="number"
+                                                       name="num-product1"
+                                                       value="{{ item.quantity }}">
+                                                <form action="{% url 'add-cart' %}" method="post">
+                                                    {% csrf_token %}
+                                                    <input type="hidden" name="product_id" value="{{ product.id }}">
+                                                    <input class="redirect_url_class" type="hidden" name="redirect_url"
+                                                           value="">
+                                                    <button class="color1 flex-c-m size7 bg8 eff2">
+                                                        <i type="submit" class="fs-12 fa fa-plus"
+                                                           aria-hidden="true"></i>
+                                                    </button>
+                                                </form>
+
+                                            </div>
+                                        </td>
+                                        {#                                        <td class="column-5">${{ item.total_amount }}</td>#}
+                                    </tr>
+                                {% endwith %}
+                            {% endfor %}
+                        </table>
+                    </div>
+                </div>
+
+                <div class="flex-w flex-sb-m p-t-25 p-b-25 bo8 p-l-35 p-r-60 p-lr-15-sm">
+                    {#                <div class="flex-w flex-m w-full-sm">#}
+                    {#                    <div class="size11 bo4 m-r-10">#}
+                    {#                        <input class="sizefull s-text7 p-l-22 p-r-22" type="text" name="coupon-code"#}
+                    {#                               placeholder="Coupon Code">#}
+                    {#                    </div>#}
+                    {##}
+                    {#                    <div class="size12 trans-0-4 m-t-10 m-b-10 m-r-10">#}
+                    {#                        <!-- Button -->#}
+                    {#                        <button class="flex-c-m sizefull bg1 bo-rad-23 hov1 s-text1 trans-0-4">#}
+                    {#                            Применить купон#}
+                    {#                        </button>#}
+                    {#                    </div>#}
+                    {#                </div>#}
+
+                    <div class="size10 trans-0-4 m-t-10 m-b-10">
+                        <!-- Button -->
+                        {#                        <button class="flex-c-m sizefull bg1 bo-rad-23 hov1 s-text1 trans-0-4">#}
+                        {#                            Обновить корзину#}
+                        {#                        </button>#}
+                    </div>
+                </div>
+
+                <!-- Total -->
+
+                <div id="checkout" class="bo9 w-size18 p-l-40 p-r-40 p-t-30 p-b-38 m-t-30 m-r-0 m-l-auto p-lr-15-sm">
+
+                    <h5 class="m-text20 p-b-24">
+                        Оформление заказа
+                    </h5>
+
+                    <!--  -->
+                    <div class="flex-w flex-sb-m p-b-12">
+					<span class="s-text18 w-size19 w-full-sm">
+						Итог:
+					</span>
+
+                        <span class="m-text21 w-size20 w-full-sm">
+{#						${{ cart.total_cost }}#}
+					</span>
+                    </div>
+
+
+                    {% if user.is_authenticated %}
+                        <form action="{% url 'create-order' %}" method="post">
+                            {% csrf_token %}
+                            <div class="flex-w flex-sb bo10 p-t-15 p-b-20">
+					<span class="s-text18 w-size19 w-full-sm">
+						Адрес:
+					</span>
+
+                                <div class="w-size20 w-full-sm">
+                                    <p class="s-text8 p-b-23">
+                                        Введите свой адрес или выберите старый адрес
+                                    </p>
+
+                                    <span class="s-text19">
+                                Выберите адрес
+						    </span>
+
+                                    {% if have_adr %}
+                                        <div class="rs2-select2 rs3-select2 rs4-select2 bo4 of-hidden w-size21 m-t-8 m-b-12">
+                                            <select class="selection-2" name="address_from">
+                                                <option value="0">Выберите адрес . . .</option>
+                                                {% for a in adr %}
+                                                    <option value="{{ a.id }}">{{ a.address }}</option>
+                                                {% endfor %}
+                                            </select>
+                                        </div>
+                                    {% endif %}
+                                    <span class="s-text19">
+							    Или введите новый
+						    </span>
+                                    <div class="rs2-select2 rs3-select2 rs4-select2 bo4 of-hidden w-size21 m-t-8 m-b-12">
+                                        <select class="selection-2" name="country">
+                                            <option value="0">Select a country...</option>
+                                            {% for country in countries %}
+                                                <option value="{{ country.id }}">{{ country.name }}</option>
+                                            {% endfor %}
+                                        </select>
+                                    </div>
+
+                                    <div class="size13 bo4 m-b-12">
+                                        <input class="sizefull s-text7 p-l-15 p-r-15" type="text" name="city"
+                                               placeholder="Город">
+                                    </div>
+
+                                    <div class="size13 bo4 m-b-22">
+                                        <input class="sizefull s-text7 p-l-15 p-r-15" type="text" name="address"
+                                               placeholder="Адрес">
+                                    </div>
+
+                                    {#                            <div class="size14 trans-0-4 m-b-10">#}
+                                    {#                                <!-- Button -->#}
+                                    {#                                <button class="flex-c-m sizefull bg1 bo-rad-23 hov1 s-text1 trans-0-4">#}
+                                    {#                                    Update Totals#}
+                                    {#                                </button>#}
+                                    {#                            </div>#}
+                                </div>
+                            </div>
+                            <div class="size15 trans-0-4">
+                                <!-- Button -->
+                                <button class="flex-c-m sizefull bg1 bo-rad-23 hov1 s-text1 trans-0-4">
+                                    Оформить заказ
+                                </button>
+                            </div>
+                        </form>
+
+                    {% else %}
+                        <div class="flex-w flex-sb bo10 p-t-15 p-b-20">
+                            {#					<span class="s-text18 w-size19 w-full-sm">#}
+                            {#						Shipping:#}
+                            {#					</span>#}
+
+                            <div class="w-size20 w-full-sm">
+                                <p class="s-text8 p-b-23">
+                                    Вы должны зарегистрироваться, чтобы оформить заказ
+                                </p>
+
+                            </div>
+                        </div>
+
+
+
+                        <div class="size15 trans-0-4">
+                            <!-- Button -->
+                            <a href="{% url 'login' %}" class="flex-c-m sizefull bg1 bo-rad-23 hov1 s-text1 trans-0-4">
+                                АВТОРИЗАЦИЯ
+                            </a>
+                        </div>
+                    {% endif %}
+                    <!--  -->
+
+                </div>
+            {% else %}
+
+                </div>
+                </section>
+                <h5 style="margin-left: 40%; margin-top: -30px; margin-bottom: 100px" class="m-text20 p-b-24">
+                    Ваша корзина пуста.
+                </h5>
+            {% endif %}
+    <script>
+        var els = document.getElementsByClassName("redirect_url_class");
+        for (var i = 0; i < els.length; i++) {
+            els[i].value = window.location.href;
+        }
+    </script>
+{% endblock %}
+
+{% block scripts %}
+
+{% endblock %}

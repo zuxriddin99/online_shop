@@ -1,0 +1,35 @@
+{% load static %}
+
+<div class="header-cart header-dropdown">
+    <ul class="header-cart-wrapitem">
+        {% for item in wish_list %}
+            <li class="header-cart-item">
+                <form method="post" action="{% url 'remove-favourite' %}">
+                    {% csrf_token %}
+                    <input type="hidden" name="product_id" value="{{ item.id }}">
+                    <input id="redirect_url_id" type="hidden" name="redirect_url" value="">
+                    <button style="border: none">
+                        <div class="header-cart-item-img">
+                            <img src="{{ item.poster }}" alt="IMG">
+                        </div>
+                    </button>
+
+                </form>
+
+                <div class="header-cart-item-txt">
+
+                    <a href="{% url 'product-detail' item.slug %}" class="header-cart-item-name">
+                        {{ item.title }}
+                    </a>
+
+                </div>
+            </li>
+        {% endfor %}
+    </ul>
+
+
+</div>
+<script>
+    document.getElementById("redirect_url_id").value = window.location.href;
+
+</script>

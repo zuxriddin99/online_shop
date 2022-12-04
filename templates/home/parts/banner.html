@@ -1,0 +1,117 @@
+{% load static %}
+{% get_media_prefix as MEDIA_URL %}
+
+<section class="banner bgwhite p-t-40 p-b-40">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-10 col-md-8 col-lg-4 m-l-r-auto">
+                <!-- block1 -->
+                <div class="block1 hov-img-zoom pos-relative m-b-30">
+                    <a href="{% url 'shop' %}?category={{ config.B1_CAT_ID }}"><img src="{{ MEDIA_URL }}{{ config.B1 }}" alt="IMG-BENNER"></a>
+
+                    <div class="block1-wrapbtn w-size2">
+                        <!-- Button -->
+                        <a href="{% url 'shop' %}?category={{ config.B1_CAT_ID }}"
+                           class="flex-c-m size2  bg3 hov1 trans-0-4">
+                            {{ B1_CAT_NAME }}
+                        </a>
+                    </div>
+                </div>
+                <div class="block1 hov-img-zoom pos-relative m-b-30">
+                    <img src="{{ MEDIA_URL }}{{ config.B4 }}" alt="IMG-BENNER">
+
+                    <div class="block1-wrapbtn w-size2">
+                        <!-- Button -->
+                        <a href="{% url 'shop' %}?category={{ config.B4_CAT_ID }}"
+                           class="flex-c-m size2  bg3 hov1 trans-0-4">
+                            <span>{{ B4_CAT_NAME }}</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-sm-10 col-md-8 col-lg-4 m-l-r-auto">
+                <!-- block1 -->
+                <div class="block1 hov-img-zoom pos-relative m-b-30">
+                    <a href="{% url 'shop' %}?category={{ config.B2_CAT_ID }}">
+                        <img src="{{ MEDIA_URL }}{{ config.B2 }}" alt="IMG-BENNER">
+                    </a>
+
+                    <div class="block1-wrapbtn w-size2">
+                        <!-- Button -->
+                        <a href="{% url 'shop' %}?category={{ config.B2_CAT_ID }}"
+                           class="flex-c-m size2  bg3 hov1 trans-0-4">
+                            {{ B2_CAT_NAME }}
+                        </a>
+                    </div>
+                </div>
+                <div class="block1 hov-img-zoom pos-relative m-b-30">
+                    <a href="{% url 'shop' %}?category={{ config.B5_CAT_ID }}">
+                        <img src="{{ MEDIA_URL }}{{ config.B5 }}" alt="IMG-BENNER">
+                    </a>
+
+                    <div class="block1-wrapbtn w-size2">
+                        <!-- Button -->
+                        <a href="{% url 'shop' %}?category={{ config.B5_CAT_ID }}"
+                           class="flex-c-m size2  bg3 hov1 trans-0-4">
+                            {{ B5_CAT_NAME }}
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-sm-10 col-md-8 col-lg-4 m-l-r-auto">
+                <!-- block1 -->
+                <div class="block1 hov-img-zoom pos-relative m-b-30">
+                    <a href="{% url 'shop' %}?category={{ config.B3_CAT_ID }}">
+                        <img src="{{ MEDIA_URL }}{{ config.B3 }}" alt="IMG-BENNER">
+                    </a>
+
+                    <div class="block1-wrapbtn w-size2">
+                        <!-- Button -->
+                        <a href="{% url 'shop' %}?category={{ config.B3_CAT_ID }}"
+                           class="flex-c-m size2  bg3 hov1 trans-0-4">
+                            {{ B3_CAT_NAME }}
+
+                        </a>
+                    </div>
+                </div>
+                <div class="block1 hov-img-zoom pos-relative m-b-30">
+                    <a href="{% url 'shop' %}?category={{ config.B6_CAT_ID }}">
+                        <img src="{{ MEDIA_URL }}{{ config.B6 }}" alt="IMG-BENNER">
+                    </a>
+
+                    <div class="block1-wrapbtn w-size2">
+                        <!-- Button -->
+                        <a href="{% url 'shop' %}?category={{ config.B6_CAT_ID }}"
+                           class="flex-c-m size2  bg3 hov1 trans-0-4">
+                            {{ B6_CAT_NAME }}
+                        </a>
+                    </div>
+                </div>
+
+                <!-- block2 -->
+                {#                <div class="block2 wrap-pic-w pos-relative m-b-30">#}
+                {#                    <img src="{% static 'images/icons/bg-01.jpg' %}" alt="IMG">#}
+                {##}
+                {#                    <div class="block2-content sizefull ab-t-l flex-col-c-m">#}
+                {#                        <h4 class="m-text4 t-center w-size3 p-b-8">#}
+                {#                            Sign up & get 20% off#}
+                {#                        </h4>#}
+                {##}
+                {#                        <p class="t-center w-size4">#}
+                {#                            Be the frist to know about the latest fashion news and get exclu-sive offers#}
+                {#                        </p>#}
+                {##}
+                {#                        <div class="w-size2 p-t-25">#}
+                {#                            <!-- Button -->#}
+                {#                            <a href="#" class="flex-c-m size2 bg4 bo-rad-23 hov1 m-text3 trans-0-4">#}
+                {#                                Sign Up#}
+                {#                            </a>#}
+                {#                        </div>#}
+                {#                    </div>#}
+                {#                </div>#}
+            </div>
+        </div>
+    </div>
+</section>
