@@ -10,25 +10,25 @@ CONSTANCE_ADDITIONAL_FIELDS = {
 CONSTANCE_CONFIG = {
     'CURRENCY': (Decimal(110000), 'один доллар в сумме', Decimal),
 
-    'SEO_HOME_TITLE': ('', 'Заголовок гл. страницы'),
-    'SEO_HOME_KEYWORDS': ('', 'Кейвордс гл. страницы'),
-    'SEO_HOME_DESC': ('', 'Описание гл. страницы'),
+    'SEO_HOME_TITLE': ('title', 'Заголовок гл. страницы'),
+    'SEO_HOME_KEYWORDS': ('keywords', 'Кейвордс гл. страницы'),
+    'SEO_HOME_DESC': ('desc', 'Описание гл. страницы'),
     'SEO_HOME_URL': ('https://vikko.uz/', 'Адрес сайта'),
-    'SEO_HOME_IMAGE': ('', 'Описание гл. страницы', 'image_field'),
+    'SEO_HOME_IMAGE': ('images/master-slide-03.jpg', 'Описание гл. страницы', 'image_field'),
 
-    'SEO_SHOP_TITLE': ('', 'Заголовок магазин страницы'),
-    'SEO_SHOP_KEYWORDS': ('', 'Кейвордс магазин страницы'),
-    'SEO_SHOP_DESC': ('', 'Описание магазин страницы'),
+    'SEO_SHOP_TITLE': ('title', 'Заголовок магазин страницы'),
+    'SEO_SHOP_KEYWORDS': ('keyword', 'Кейвордс магазин страницы'),
+    'SEO_SHOP_DESC': ('dedsc', 'Описание магазин страницы'),
     'SEO_SHOP_URL': ('https://vikko.uz/', 'Адрес сайта'),
-    'SEO_SHOP_IMAGE': ('', 'Описание магазин страницы', 'image_field'),
+    'SEO_SHOP_IMAGE': ('images/master-slide-03.jpg', 'Описание магазин страницы', 'image_field'),
 
-    'SEO_PRODUCTS_TITLE': ('', 'Заголовок продукт страницы'),
-    'SEO_PRODUCTS_KEYWORDS': ('', 'Кейвордс продукт страницы'),
-    'SEO_PRODUCTS_DESC': ('', 'Описание продукт страницы'),
+    'SEO_PRODUCTS_TITLE': ('title', 'Заголовок продукт страницы'),
+    'SEO_PRODUCTS_KEYWORDS': ('keyword', 'Кейвордс продукт страницы'),
+    'SEO_PRODUCTS_DESC': ('desc', 'Описание продукт страницы'),
     'SEO_PRODUCTS_URL': ('https://vikko.uz/', 'Адрес сайта'),
-    'SEO_PRODUCTS_IMAGE': ('', 'Описание продукт страницы', 'image_field'),
+    'SEO_PRODUCTS_IMAGE': ('images/master-slide-03.jpg', 'Описание продукт страницы', 'image_field'),
 
-    'SEO_BLOG_TITLE': ('', 'Заголовок гл. страницы'),
+    'SEO_BLOG_TITLE': ('title', 'Заголовок гл. страницы'),
 
     'S1': ('images/master-slide-03.jpg', 'Изображение в слайдере \n Рекомендуемый размер изображения 1920x570!',
            'image_field'),
@@ -87,6 +87,10 @@ CONSTANCE_CONFIG_FIELDSETS = {
     },
     'Настройки Магазин SEO': {
         'fields': ('SEO_SHOP_TITLE', 'SEO_SHOP_KEYWORDS', 'SEO_SHOP_DESC', 'SEO_SHOP_URL', 'SEO_SHOP_IMAGE'),
+        'collapse': True
+    },
+    'Настройки Блог SEO': {
+        'fields': ('SEO_BLOG_TITLE', ),
         'collapse': True
     },
     'Фото': {
