@@ -45,7 +45,7 @@ class CreateOrder(CreateView):
             return HttpResponseRedirect('/cart/')
         order = self.create_order(request, address_id)
         messages.success(self.request, 'Заказ успешно создан.')
-        sms_to_phone(message=f"New order create №{order.id}")
+        # sms_to_phone(message=f"New order create №{order.id}")
         return HttpResponseRedirect('/cart/')
 
     def create_order(self, request, address):
