@@ -18,7 +18,7 @@
                             <a href="{% url 'product-detail' popular_product.slug %}"
                                class="block2-name dis-block s-text3 p-b-5">
                                 <div class="block2-img wrap-pic-w of-hidden pos-relative {% if popular_product.new %} block2-labelnew {% endif %}">
-                                    <img src="{{ popular_product.poster }}" alt="IMG-PRODUCT">
+                                    <img style="height: 290px" src="{{ popular_product.poster }}" alt="IMG-PRODUCT">
 
                                     <div class="block2-overlay trans-0-4">
                                         {#                                    <a href="#" class="block2-btn-towishlist hov-pointer trans-0-4">#}
@@ -48,7 +48,7 @@
 
 
                                     <span class="block2-price m-text6 p-r-5">
-{#									{{ popular_product.price }}$#}
+									{{ popular_product.price }}$
 								</span>
                                 </div>
                             </a>

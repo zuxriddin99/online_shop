@@ -22,16 +22,16 @@
                         {{ item.product.title }}
                     </a>
 
-{#                    <span class="header-cart-item-info">#}
-{#                        {{ item.quantity }} x ${{ item.price }}#}
-{#                    </span>#}
+                    <span class="header-cart-item-info">
+                        {{ item.quantity }} x ${{ item.price }}
+                    </span>
                 </div>
             </li>
         {% endfor %}
     </ul>
 
     <div class="header-cart-total">
-{#        Итоговая сумма: ${{ cart.total_cost }}#}
+        Итоговая сумма: ${{ cart.total_cost }}
     </div>
 
     <div class="header-cart-buttons">

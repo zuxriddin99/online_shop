@@ -26,7 +26,7 @@ urlpatterns = [
     path('ckeditor/', include('ckeditor_uploader.urls')),
     path('__debug__/', include('debug_toolbar.urls')),
     path('', HomePage.as_view(), name='home-page'),
-    path('blog/<str:slug>/', BlogDetail.as_view(), name='blog-detail'),
+    path('blog/<int:id>/', BlogDetail.as_view(), name='blog-detail'),
     path('blog/blog-list/', BlogPage.as_view(), name='blog-page'),
     path('shop/', ShopView.as_view(), name='shop'),
     path('shop/<str:slug>/', ProductDetailView.as_view(), name='product-detail'),

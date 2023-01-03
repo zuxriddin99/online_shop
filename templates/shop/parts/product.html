@@ -58,14 +58,14 @@
                         <span class="block2-price p-r-5"
                               style="font-size: 12px; color: gray;">{{ product.dosage }}</span>
                         <br>
-{#                        <span class="block2-price m-text6 p-r-5"><b>#}
-{#                            {% if product.price_discount %}#}
-{#                                <span style="text-decoration: line-through;">{{ product.price }}$</span>#}
-{#                                - <span style="color: #dc2323;">{{ product.price_discount }}$</span>#}
-{#                            {% else %}#}
-{#                                {{ product.price }}$#}
-{#                            {% endif %}#}
-{#                        </b></span>#}
+                        <span class="block2-price m-text6 p-r-5"><b>
+                            {% if product.price_discount %}
+                                <span style="text-decoration: line-through;">{{ product.price }}$</span>
+                                - <span style="color: #dc2323;">{{ product.price_discount }}$</span>
+                            {% else %}
+                                {{ product.price }}$
+                            {% endif %}
+                        </b></span>
                         {% if product.telegram_link %}
                             <a href="{{ product.telegram_link }}" class="topbar-social-item fa fa-telegram"
                                title="Ссылка на товар в телеграме"></a>

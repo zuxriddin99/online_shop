@@ -47,7 +47,7 @@ class BlogDetail(DetailView):
     template_name = 'blog/blog_detail.html'
     model = OurBlog
     context_object_name = 'blog'
-
+    pk_url_kwarg = 'id'
 
 class AboutUsDetail(DetailView):
     template_name = 'about_us/about_us_detail.html'

@@ -30,26 +30,26 @@
                 {{ product.title }} {{ product.dosage }} mg
             </h4>
 
-{#            <span class="m-text17" style="color: #3f0259;">#}
-{#                {% if product.price_discount %}#}
-{#                    <span style="text-decoration: line-through;">{{ product.price }}$ </span> -#}
-{#                    <span style="color: #dc2323;">{{ product.price_discount }}$ </span>#}
-{#                {% else %}#}
-{#                    {{ product.price }}$#}
-{#                {% endif %}#}
-{#            </span>#}
+            <span class="m-text17" style="color: #3f0259;">
+                {% if product.price_discount %}
+                    <span style="text-decoration: line-through;">{{ product.price }}$ </span> -
+                    <span style="color: #dc2323;">{{ product.price_discount }}$ </span>
+                {% else %}
+                    {{ product.price }}$
+                {% endif %}
+            </span>
 
             <p class="s-text8 p-t-10" style="color: #3f0259;">
-                {#                {{ product.all_prices_with_quantity|safe }}#}
-{#                {% for item in product.prices.all %}#}
-{#                    {% if item.price_discount %}#}
-{#                        от {{ item.from_quantity }} шт. =#}
-{#                        <span style="text-decoration: line-through;">{{ item.price }}$</span> -#}
-{#                        <span style="color: #dc2323;">{{ item.price_discount }}$</span> <br>#}
-{#                    {% else %}#}
-{#                        от {{ item.from_quantity }} шт. = {{ item.price }}$ <br>#}
-{#                    {% endif %}#}
-{#                {% endfor %}#}
+                                {{ product.all_prices_with_quantity|safe }}
+                {% for item in product.prices.all %}
+                    {% if item.price_discount %}
+                        от {{ item.from_quantity }} шт. =
+                        <span style="text-decoration: line-through;">{{ item.price }}$</span> -
+                        <span style="color: #dc2323;">{{ item.price_discount }}$</span> <br>
+                    {% else %}
+                        от {{ item.from_quantity }} шт. = {{ item.price }}$ <br>
+                    {% endif %}
+                {% endfor %}
 
             </p>
 
