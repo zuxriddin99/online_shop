@@ -186,9 +186,9 @@ def get_random_code(length=6) -> str:
 
 
 def send_sms_code(user: User) -> int:
-    # code = get_random_code() # todo
-    code = 123456
-    # sms_to_phone(user.phone, f"Code - {code}")
+    code = get_random_code() # todo
+    # code = 123456
+    sms_to_phone(user.phone, f"Code - {code}")
     return int(code)
 
 
